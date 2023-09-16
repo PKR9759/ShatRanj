@@ -29,11 +29,13 @@
         width: 75px;
         height: 75px;
         border: 1px solid #000;
+        
       }
       td img {
         padding-left: 7px;
         width: 60px;
         height: 60px;
+        
       }
       .white {
         background-color: #eeefd3; /* White */
@@ -42,12 +44,11 @@
         background-color: #779756; /* Green */
       }
 
-      /* Side boxes forpadding:5px;
-            border: 1px solid gray;
-            box-shadow: 2px 4px 2px rgb(171, 168, 168); eliminated pieces */
-      .side-box1 {
-        height:200px;
-        width:400px;
+     
+      
+      .eliminatebox{
+        height: 200px;
+        width: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -56,16 +57,14 @@
         border: 1px solid gray;
         box-shadow: 2px 4px 2px rgb(171, 168, 168);
       }
-      .side-box2 {
-        height:200px;
-        width:400px;
+      .eliminatebox .pieces{
+        margin-top:12px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-        padding: 5px;
-        border: 1px solid gray;
-        box-shadow: 2px 4px 2px rgb(171, 168, 168);
+        
+      }
+      .eliminatebox .pieces img{
+        height: 50px;
+        width: 50px;
       }
       .player-name {
         font-weight: bold;
@@ -80,7 +79,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 60px;
+        margin-top: 30px;
       }
     </style>
   </head>
@@ -91,217 +90,217 @@
       </div>
       <table>
         <tr>
-          <td  id="00"   class="white">
+          <td id="00" class="white">
             <img src="we.svg" alt="White Rook" class="piece" />
           </td>
-          <td  id="01" class="black">
+          <td id="01" class="black">
             <img src="be.svg" alt="Black Knight" class="piece" />
           </td>
-          <td  id="02" class="white">
+          <td id="02" class="white">
             <img src="bk.svg" alt="White Bishop" class="piece" />
           </td>
-          <td  id="03" class="black">
+          <td id="03" class="black">
             <img src="wk.svg" alt="Black Queen" class="piece" />
           </td>
-          <td  id="04" class="white">
+          <td id="04" class="white">
             <img src="bs.svg" alt="White King" class="piece" />
           </td>
-          <td  id="05" class="black">
+          <td id="05" class="black">
             <img src="wq.svg" alt="Black Bishop" class="piece" />
           </td>
-          <td  id="06" class="white">
+          <td id="06" class="white">
             <img src="bc.svg" alt="White Knight" class="piece" />
           </td>
-          <td  id="07" class="black">
+          <td id="07" class="black">
             <img src="bq.svg" alt="Black Rook" class="piece" />
           </td>
         </tr>
 
         <tr>
-          <td  id="10" class="black">
+          <td id="10" class="black">
             <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
           </td>
-          <td  id="11" class="white">
+          <td id="11" class="white">
             <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
           </td>
-          <td  id="12" class="black">
+          <td id="12" class="black">
             <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
           </td>
-          <td  id="13" class="white">
+          <td id="13" class="white">
             <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
           </td>
-          <td  id="14" class="black">
+          <td id="14" class="black">
             <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
           </td>
-          <td  id="15" class="white">
+          <td id="15" class="white">
             <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
           </td>
-          <td  id="16" class="black">
+          <td id="16" class="black">
             <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
           </td>
-          <td  id="17" class="white">
+          <td id="17" class="white">
             <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
           </td>
         </tr>
 
         <tr>
-          <td  id="20" class="white">
+          <td id="20" class="white">
             <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
           </td>
-          <td  id="21" class="black">
+          <td id="21" class="black">
             <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
           </td>
-          <td  id="22" class="white">
+          <td id="22" class="white">
             <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
           </td>
-          <td  id="23" class="black">
+          <td id="23" class="black">
             <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
           </td>
-          <td  id="24" class="white">
+          <td id="24" class="white">
             <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
           </td>
-          <td  id="25" class="black">
+          <td id="25" class="black">
             <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
           </td>
-          <td  id="26" class="white">
+          <td id="26" class="white">
             <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
           </td>
-          <td  id="27" class="black">
+          <td id="27" class="black">
             <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
           </td>
         </tr>
 
         <tr>
-          <td  id="30" class="black">
+          <td id="30" class="black">
             <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
           </td>
-          <td  id="31" class="white">
+          <td id="31" class="white">
             <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
           </td>
-          <td  id="32" class="black">
+          <td id="32" class="black">
             <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
           </td>
-          <td  id="33" class="white">
+          <td id="33" class="white">
             <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
           </td>
-          <td  id="34" class="black">
+          <td id="34" class="black">
             <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
           </td>
-          <td  id="35" class="white">
+          <td id="35" class="white">
             <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
           </td>
-          <td  id="36" class="black">
+          <td id="36" class="black">
             <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
           </td>
-          <td  id="37" class="white">
+          <td id="37" class="white">
             <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
           </td>
         </tr>
 
         <tr>
-          <td  id="40" class="white">
+          <td id="40" class="white">
             <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
           </td>
-          <td  id="41" class="black">
+          <td id="41" class="black">
             <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
           </td>
-          <td  id="42" class="white">
+          <td id="42" class="white">
             <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
           </td>
-          <td  id="43" class="black">
+          <td id="43" class="black">
             <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
           </td>
-          <td  id="44" class="white">
+          <td id="44" class="white">
             <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
           </td>
-          <td  id="45" class="black">
+          <td id="45" class="black">
             <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
           </td>
-          <td  id="46" class="white">
+          <td id="46" class="white">
             <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
           </td>
-          <td  id="47" class="black">
+          <td id="47" class="black">
             <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
           </td>
         </tr>
 
         <tr>
-          <td  id="50" class="black">
+          <td id="50" class="black">
             <img src="be.svg" alt="Black Knight" class="piece" />
           </td>
-          <td  id="51" class="white">
+          <td id="51" class="white">
             <img src="bk.svg" alt="White Bishop" class="piece" />
           </td>
-          <td  id="52" class="black">
+          <td id="52" class="black">
             <img src="wk.svg" alt="Black Queen" class="piece" />
           </td>
-          <td  id="53" class="white">
+          <td id="53" class="white">
             <img src="bs.svg" alt="White King" class="piece" />
           </td>
-          <td  id="54" class="black">
+          <td id="54" class="black">
             <img src="wq.svg" alt="Black Bishop" class="piece" />
           </td>
-          <td  id="55" class="white">
+          <td id="55" class="white">
             <img src="bc.svg" alt="White Knight" class="piece" />
           </td>
-          <td  id="56" class="black">
+          <td id="56" class="black">
             <img src="bq.svg" alt="Black Rook" class="piece" />
           </td>
-          <td  id="57" class="white">
+          <td id="57" class="white">
             <img src="we.svg" alt="White Rook" class="piece" />
           </td>
         </tr>
 
         <tr>
-          <td  id="60" class="white">
+          <td id="60" class="white">
             <img src="we.svg" alt="White Rook" class="piece" />
           </td>
-          <td  id="61" class="black">
+          <td id="61" class="black">
             <img src="be.svg" alt="Black Knight" class="piece" />
           </td>
-          <td  id="62" class="white">
+          <td id="62" class="white">
             <img src="bk.svg" alt="White Bishop" class="piece" />
           </td>
-          <td  id="63" class="black">
+          <td id="63" class="black">
             <img src="wk.svg" alt="Black Queen" class="piece" />
           </td>
-          <td  id="64" class="white">
+          <td id="64" class="white">
             <img src="bs.svg" alt="White King" class="piece" />
           </td>
-          <td  id="65" class="black">
+          <td id="65" class="black">
             <img src="wq.svg" alt="Black Bishop" class="piece" />
           </td>
-          <td  id="66" class="white">
+          <td id="66" class="white">
             <img src="bc.svg" alt="White Knight" class="piece" />
           </td>
-          <td  id="67" class="black">
+          <td id="67" class="black">
             <img src="bq.svg" alt="Black Rook" class="piece" />
           </td>
         </tr>
 
         <tr>
-          <td  id="70" class="black">
+          <td id="70" class="black">
             <img src="be.svg" alt="Black Knight" class="piece" />
           </td>
-          <td  id="71" class="white">
+          <td id="71" class="white">
             <img src="bk.svg" alt="White Bishop" class="piece" />
           </td>
-          <td  id="72" class="black">
+          <td id="72" class="black">
             <img src="wk.svg" alt="Black Queen" class="piece" />
           </td>
-          <td  id="73" class="white">
+          <td id="73" class="white">
             <img src="bs.svg" alt="White King" class="piece" />
           </td>
-          <td  id="74" class="black">
+          <td id="74" class="black">
             <img src="wq.svg" alt="Black Bishop" class="piece" />
           </td>
-          <td  id="75" class="white">
+          <td id="75" class="white">
             <img src="bc.svg" alt="White Knight" class="piece" />
           </td>
-          <td  id="76" class="black">
+          <td id="76" class="black">
             <img src="bq.svg" alt="Black Rook" class="piece" />
           </td>
-          <td  id="77" class="white">
+          <td id="77" class="white">
             <img src="we.svg" alt="White Rook" class="piece" />
           </td>
         </tr>
@@ -311,27 +310,23 @@
       </div>
     </div>
     <div class="eliminated">
-      <div class="side-box1">
-        <div class="player-name">Player 1</div>
-        <div class="eliminated-piece">
-          <img src="eliminated_piece1.png" alt="Eliminated Piece 1" />
-        </div>
-        <div class="eliminated-piece">
-          <img src="eliminated_piece2.png" alt="Eliminated Piece 2" />
-        </div>
-       
-      </div>
+      <div class="eliminatebox">
+        <div class="player-name" >Eliminated By Black</div>
+        <div class="pieces">
+          
 
-      <div class="side-box2">
-        <div class="player-name">Player 2</div>
-        <div class="eliminated-piece">
-          <img src="eliminated_piece3.png" alt="Eliminated Piece 3" />
-        </div>
-        <div class="eliminated-piece">
-          <img src="eliminated_piece4.png" alt="Eliminated Piece 4" />
         </div>
         
       </div>
+
+      <div class="eliminatebox">
+        <div class="player-name">Eliminated By White</div>
+        <div class="pieces">
+          
+          
+        </div>
+      </div>
     </div>
+    <script src="logic.js"></script>
   </body>
 </html>
