@@ -2,7 +2,7 @@
 //function to get img name from position
 
 function getImgName(cellid) {
-    console.log(cellid);
+    // console.log(cellid);
     let cell = document.getElementById(cellid);
     let Imgcell = cell.querySelector("img");
     if (Imgcell == null) return null;
@@ -139,6 +139,7 @@ function showSoldierMoves(curPosition) {
 function showCamelMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
+    console.log(cell.childElementCount); 
     let Imgname = Imgcell.getAttribute("src");
 
     let positions = [];
@@ -244,7 +245,7 @@ function showElephantMoves(curPosition) {
     }
     positions.push(temp);
     temp = [];
-    console.log(positions);
+    // console.log(positions);
     for (let i of positions) {
         // console.log(i);
 
@@ -300,42 +301,21 @@ function showHorseMoves(curPosition) {
 
 
 
+function clearAllMoves() {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            let cell = document.getElementById(i.toString() + j.toString());
 
+            if (cell.classList.contains("highlighted_cell_filled")) {
+                cell.classList.remove("highlighted_cell_filled");
+            }
+            if (cell.classList.contains("highlighted_cell_empty")) {
+                cell.classList.remove("highlighted_cell_empty");
 
-
-for (let i = 0; i < 8; i++) {
-    for (let j = 0; j < 8; j++) {
-        let cellid = (i).toString() + (j).toString();
-        let cell = document.getElementById(cellid);
-        let Imgcell = cell.querySelector("img");
-        if (Imgcell) {
-            let Imgname = Imgcell.getAttribute("src");
-            cell.addEventListener('click', () => {
-                switch (Imgname[1]) {
-                    case 's': showSoldierMoves(cellid); break;
-                    case 'k': showKingMoves(cellid); break;
-                    case 'q': showQueenMoves(cellid); break;
-                    case 'c': showCamelMoves(cellid); break;
-                    case 'e': showElephantMoves(cellid); break;
-                    case 'h': showHorseMoves(cellid); break;
-                }
-            });
-
+            }
         }
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -358,9 +338,17 @@ function killing(cellid) {
     if (Imgname[0] == "b") {
         killedByWhite++;
         eliminateboxWhite.appendChild(Imgcell);
+        
     } else {
         killedByBlack++;
         eliminateboxBlack.appendChild(Imgcell);
+    }
+
+    if(Imgname[1] == 'k' || killedByBlack==16 || killedByWhite==16){//king is eliminated or all     pieces are eliminated
+        console.log("GAME OVER ");
+
+        // exiting 
+        //restart game over
     }
     // console.log(Imgname);
 }
@@ -376,12 +364,73 @@ function move(from, to) {
     if (tocell.childElementCount == 0) {
         tocell.innerHTML = fromcell.innerHTML;
         fromcell.innerHTML = "";
+        console.log(fromcell.innerHTML,tocell.innerHTML);
     } else {
-        killing(tocell);
+        killing(to);
         tocell.innerHTML = fromcell.innerHTML;
+
         fromcell.innerHTML = "";
     }
 }
-setTimeout(() => {
-    move("01", "21");
-}, 2000);
+// setTimeout(() => {
+//     move("01", "21");
+// }, 2000);
+
+
+
+
+
+
+let lastClickedCell = null;
+
+for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+        let cellid = (i).toString() + (j).toString();
+            let cell = document.getElementById(cellid);
+
+        cell.addEventListener('click', () => {
+            
+            let Imgcell = cell.querySelector("img");
+            if (cell.classList.contains("highlighted_cell_filled") || cell.classList.contains("highlighted_cell_empty")) {
+                move(lastClickedCell, cellid);
+                clearAllMoves();
+
+            }
+            else if (Imgcell) {
+                let Imgname = Imgcell.getAttribute("src");
+                clearAllMoves();
+                switch (Imgname[1]) {
+                    case 's': showSoldierMoves(cellid); break;
+                    case 'k': showKingMoves(cellid); break;
+                    case 'q': showQueenMoves(cellid); break;
+                    case 'c': showCamelMoves(cellid); break;
+                    case 'e': showElephantMoves(cellid); break;
+                    case 'h': showHorseMoves(cellid); break;
+                    
+                }
+                lastClickedCell = cellid;
+            }
+
+            
+        });
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,348 +1,288 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .board {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 60px;
-      }
-      .eliminated {
-        display: flex;
-        flex-direction: column;
-        margin-left: 20%;
-        justify-content: space-between;
-        align-items: end;
-      }
 
-      table {
-        border-collapse: collapse;
-        box-shadow: 6px 9px 6px rgb(164, 162, 162);
-      }
-      td {
-        width: 75px;
-        height: 75px;
-        border: 1px solid #000;
-        
-      }
-      td img {
-        padding-left: 7px;
-        width: 60px;
-        height: 60px;
-        
-      }
-      .white {
-        background-color: #eeefd3; /* White */
-      }
-      .black {
-        background-color: #779756; /* Green */
-      }
+<head>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-     
-      
-      .eliminatebox{
-        height: 200px;
-        width: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-        padding: 5px;
-        border: 1px solid gray;
-        box-shadow: 2px 4px 2px rgb(171, 168, 168);
-      }
-      .eliminatebox .pieces{
-        margin-top:12px;
-        display: flex;
-        
-      }
-      .eliminatebox .pieces img{
-        height: 50px;
-        width: 50px;
-      }
-      .player-name {
-        font-weight: bold;
-        font-size: 18px;
-      }
-      .eliminated-piece {
-        width: 30px;
-        height: 30px;
-        margin: 2px;
-      }
-      .board {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 30px;
-      }
-      .highlighted_cell_empty{
-        background-color: rgb(191, 237, 235);
-        border-radius: 20%;
-        
-        border:4px dashed rgb(117, 189, 202);
-        
-        box-shadow: 2px 4px 4px rgb(192, 190, 190);
-      }
-      .highlighted_cell_filled{
-        background-color: rgb(125, 31, 31);
-        border-radius: 10%;
-        border:4px dashed rgb(189, 65, 65) ;
-        box-shadow: 2px 4px 4px rgb(161, 66, 66);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="board">
-      <div>
-        <p><strong>Player 1 (Black)</strong></p>
-      </div>
-      <table>
-        <tr>
-          <td id="00" class="white">
-            <img src="we.svg" alt="White Rook" class="piece"  draggable="false"/>
-          </td>
-          <td id="01" class="black">
-            <img src="be.svg" alt="Black Knight" class="piece" draggable="false"  />
-          </td>
-          <td id="02" class="white">
-            <img src="bk.svg" alt="White Bishop" class="piece" draggable="false" />
-          </td>
-          <td id="03" class="black">
-            <img src="wk.svg" alt="Black Queen" class="piece" draggable="false" />
-          </td>
-          <td id="04" class="white">
-            <img src="bs.svg" alt="White King" class="piece" draggable="false" />
-          </td>
-          <td id="05" class="black">
-            <img src="wq.svg" alt="Black Bishop" class="piece" draggable="false" />
-          </td>
-          <td id="06" class="white">
-            <img src="bc.svg" alt="White Knight" class="piece" draggable="false" />
-          </td>
-          <td id="07" class="black">
-            <img src="bq.svg" alt="Black Rook" class="piece" draggable="false" />
-          </td>
-        </tr>
+    .board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 60px;
+    }
 
-        <tr>
-          <td id="10" class="black">
-            <!-- <img src="be.svg" alt="Black Knight" class="piece" draggable="false" /> -->
-          </td>
-          <td id="11" class="white">
-            <!-- <img src="bk.svg" alt="White Bishop" class="piece" draggable="false" /> -->
-          </td>
-          <td id="12" class="black">
-            <!-- <img src="wk.svg" alt="Black Queen" class="piece" draggable="false" /> -->
-          </td>
-          <td id="13" class="white">
-            <!-- <img src="bs.svg" alt="White King" class="piece" draggable="false" /> -->
-          </td>
-          <td id="14" class="black">
-            <!-- <img src="wq.svg" alt="Black Bishop" class="piece" draggable="false" /> -->
-          </td>
-          <td id="15" class="white">
-            <!-- <img src="bc.svg" alt="White Knight" class="piece" draggable="false" /> -->
-          </td>
-          <td id="16" class="black">
-            <!-- <img src="bq.svg" alt="Black Rook" class="piece" draggable="false" /> -->
-          </td>
-          <td id="17" class="white">
-            <!-- <img src="we.svg" alt="White Rook" class="piece" draggable="false" /> -->
-          </td>
-        </tr>
+    .eliminated {
+      display: flex;
+      flex-direction: column;
+      margin-left: 20%;
+      justify-content: space-between;
+      align-items: end;
+    }
 
-        <tr>
-          <td id="20" class="white">
-            <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
-          </td>
-          <td id="21" class="black">
-            <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
-          </td>
-          <td id="22" class="white">
-            <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
-          </td>
-          <td id="23" class="black">
-            <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
-          </td>
-          <td id="24" class="white">
-            <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
-          </td>
-          <td id="25" class="black">
-            <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
-          </td>
-          <td id="26" class="white">
-            <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
-          </td>
-          <td id="27" class="black">
-            <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
-          </td>
-        </tr>
+    table {
+      border-collapse: collapse;
+      box-shadow: 6px 9px 6px rgb(164, 162, 162);
+    }
 
-        <tr>
-          <td id="30" class="black">
-            <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
-          </td>
-          <td id="31" class="white">
-            <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
-          </td>
-          <td id="32" class="black">
-            <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
-          </td>
-          <td id="33" class="white">
-            <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
-          </td>
-          <td id="34" class="black">
-            <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
-          </td>
-          <td id="35" class="white">
-            <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
-          </td>
-          <td id="36" class="black">
-            <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
-          </td>
-          <td id="37" class="white">
-            <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
-          </td>
-        </tr>
+    td {
+      width: 75px;
+      height: 75px;
+      border: 1px solid #000;
+    }
 
-        <tr>
-          <td id="40" class="white">
-            <!-- <img src="we.svg" alt="White Rook" class="piece" /> -->
-          </td>
-          <td id="41" class="black">
-            <!-- <img src="be.svg" alt="Black Knight" class="piece" /> -->
-          </td>
-          <td id="42" class="white">
-            <!-- <img src="bk.svg" alt="White Bishop" class="piece" /> -->
-          </td>
-          <td id="43" class="black">
-            <!-- <img src="wk.svg" alt="Black Queen" class="piece" /> -->
-          </td>
-          <td id="44" class="white">
-            <!-- <img src="bs.svg" alt="White King" class="piece" /> -->
-          </td>
-          <td id="45" class="black">
-            <!-- <img src="wq.svg" alt="Black Bishop" class="piece" /> -->
-          </td>
-          <td id="46" class="white">
-            <!-- <img src="bc.svg" alt="White Knight" class="piece" /> -->
-          </td>
-          <td id="47" class="black">
-            <!-- <img src="bq.svg" alt="Black Rook" class="piece" /> -->
-          </td>
-        </tr>
+    td img {
+      padding-left: 7px;
+      width: 60px;
+      height: 60px;
+    }
 
-        <tr>
-          <td id="50" class="black">
-            <img src="be.svg" alt="Black Knight" class="piece" />
-          </td>
-          <td id="51" class="white">
-            <img src="bk.svg" alt="White Bishop" class="piece" />
-          </td>
-          <td id="52" class="black">
-            <img src="wk.svg" alt="Black Queen" class="piece" />
-          </td>
-          <td id="53" class="white">
-            <img src="bs.svg" alt="White King" class="piece" />
-          </td>
-          <td id="54" class="black">
-            <img src="wq.svg" alt="Black Bishop" class="piece" />
-          </td>
-          <td id="55" class="white">
-            <img src="wc.svg" alt="White Knight" class="piece" />
-          </td>
-          <td id="56" class="black">
-            <img src="bq.svg" alt="Black Rook" class="piece" />
-          </td>
-          <td id="57" class="white">
-            <img src="we.svg" alt="White Rook" class="piece" />
-          </td>
-        </tr>
+    .white {
+      background-color: #eeefd3;
+      /* White */
+    }
 
-        <tr>
-          <td id="60" class="white">
-            <img src="we.svg" alt="White Rook" class="piece" draggable="false"/>
-          </td>
-          <td id="61" class="black">
-            <img src="be.svg" alt="Black Knight" class="piece" draggable="false"/>
-          </td>
-          <td id="62" class="white">
-            <img src="bk.svg" alt="White Bishop" class="piece" draggable="false"/>
-          </td>
-          <td id="63" class="black">
-            <img src="wk.svg" alt="Black Queen" class="piece" draggable="false"/>
-          </td>
-          <td id="64" class="white">
-            <img src="bs.svg" alt="White King" class="piece" draggable="false"/>
-          </td>
-          <td id="65" class="black">
-            <img src="wq.svg" alt="Black Bishop" class="piece" draggable="false"/>
-          </td>
-          <td id="66" class="white">
-            <img src="bc.svg" alt="White Knight" class="piece" draggable="false"/>
-          </td>
-          <td id="67" class="black">
-            <img src="bq.svg" alt="Black Rook" class="piece" draggable="false"/>
-          </td>
-        </tr>
+    .black {
+      background-color: #779756;
+      /* Green */
+    }
 
-        <tr>
-          <td id="70" class="black">
-            <img src="be.svg" alt="Black Knight" class="piece" draggable="false"/>
-          </td>
-          <td id="71" class="white">
-            <img src="bk.svg" alt="White Bishop" class="piece" draggable="false"/>
-          </td>
-          <td id="72" class="black">
-            <img src="ws.svg" alt="Black Queen" class="piece" draggable="false"/>
-          </td>
-          <td id="73" class="white">
-            <img src="bs.svg" alt="White King" class="piece" draggable="false"/>
-          </td>
-          <td id="74" class="black">
-            <img src="wq.svg" alt="Black Bishop" class="piece" draggable="false"/>
-          </td>
-          <td id="75" class="white">
-            <img src="bc.svg" alt="White Knight" class="piece" draggable="false"/>
-          </td>
-          <td id="76" class="black">
-            <img src="bq.svg" alt="Black Rook" class="piece" draggable="false"/>
-          </td>
-          <td id="77" class="white">
-            <img src="we.svg" alt="White Rook" class="piece" draggable="false"/>
-          </td>
-        </tr>
-      </table>
-      <div>
-        <p><strong> Player 2 (White) </strong></p>
-      </div>
+    .eliminatebox {
+      height: 200px;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      padding: 5px;
+      border: 1px solid gray;
+      box-shadow: 2px 4px 2px rgb(171, 168, 168);
+    }
+
+    .eliminatebox .pieces {
+      margin-top: 12px;
+      display: flex;
+    }
+
+    .eliminatebox .pieces img {
+      height: 50px;
+      width: 50px;
+    }
+
+    .player-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .eliminated-piece {
+      width: 30px;
+      height: 30px;
+      margin: 2px;
+    }
+
+    .board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .highlighted_cell_empty {
+      background-color: rgb(191, 237, 235);
+      border-radius: 20%;
+
+      border: 4px dashed rgb(117, 189, 202);
+
+      box-shadow: 2px 4px 4px rgb(192, 190, 190);
+    }
+
+    .highlighted_cell_filled {
+      background-color: rgb(125, 31, 31);
+      border-radius: 10%;
+      border: 4px dashed rgb(189, 65, 65);
+      box-shadow: 2px 4px 4px rgb(161, 66, 66);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="board">
+    <div>
+      <p><strong>Player 1 (Black)</strong></p>
     </div>
-    <div class="eliminated">
-      <div class="eliminatebox">
-        <div class="player-name" >Eliminated By Black</div>
-        <div class="pieces">
-          
+    <table>
+      <tr>
+        <td id="00" class="white">
+          <img src="be.svg" alt="Black Elepahnt" class="piece" draggable="false" />
+        </td>
+        <td id="01" class="black">
+          <img src="bh.svg" alt="Black Horse" class="piece" draggable="false" />
+        </td>
+        <td id="02" class="white">
+          <img src="bc.svg" alt="Black Camel" class="piece" draggable="false" />
+        </td>
+        <td id="03" class="black">
+          <img src="bk.svg" alt="Black King" class="piece" draggable="false" />
+        </td>
+        <td id="04" class="white">
+          <img src="bq.svg" alt="Black Queen" class="piece" draggable="false" />
+        </td>
+        <td id="05" class="black">
+          <img src="bc.svg" alt="Black Camel" class="piece" draggable="false" />
+        </td>
+        <td id="06" class="white">
+          <img src="bh.svg" alt="Black Horse" class="piece" draggable="false" />
+        </td>
+        <td id="07" class="black">
+          <img src="be.svg" alt="Black Elephant" class="piece" draggable="false" />
+        </td>
+      </tr>
 
-        </div>
-        
-      </div>
+      <tr>
+        <td id="10" class="black">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="11" class="white">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="12" class="black">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="13" class="white">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="14" class="black">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="15" class="white">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="16" class="black">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="17" class="white">
+          <img src="bs.svg" alt="Black Soldier" class="piece" draggable="false" />
+        </td>
+      </tr>
 
-      <div class="eliminatebox">
-        <div class="player-name">Eliminated By White</div>
-        <div class="pieces">
-          
-          
-        </div>
-      </div>
+      <tr>
+        <td id="20" class="white"></td>
+        <td id="21" class="black"></td>
+        <td id="22" class="white"></td>
+        <td id="23" class="black"></td>
+        <td id="24" class="white"></td>
+        <td id="25" class="black"></td>
+        <td id="26" class="white"></td>
+        <td id="27" class="black"></td>
+      </tr>
+
+      <tr>
+        <td id="30" class="black"></td>
+        <td id="31" class="white"></td>
+        <td id="32" class="black"></td>
+        <td id="33" class="white"></td>
+        <td id="34" class="black"></td>
+        <td id="35" class="white"></td>
+        <td id="36" class="black"></td>
+        <td id="37" class="white"></td>
+      </tr>
+
+      <tr>
+        <td id="40" class="white"></td>
+        <td id="41" class="black"></td>
+        <td id="42" class="white"></td>
+        <td id="43" class="black"></td>
+        <td id="44" class="white"></td>
+        <td id="45" class="black"></td>
+        <td id="46" class="white"></td>
+        <td id="47" class="black"></td>
+      </tr>
+
+      <tr>
+        <td id="50" class="black"></td>
+        <td id="51" class="white"></td>
+        <td id="52" class="black"></td>
+        <td id="53" class="white"></td>
+        <td id="54" class="black"></td>
+        <td id="55" class="white"></td>
+        <td id="56" class="black"></td>
+        <td id="57" class="white"></td>
+      </tr>
+
+      <tr>
+        <td id="60" class="white">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="61" class="black">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="62" class="white">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="63" class="black">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="64" class="white">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="65" class="black">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="66" class="white">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+        <td id="67" class="black">
+          <img src="ws.svg" alt="White Soldier" class="piece" draggable="false" />
+        </td>
+      </tr>
+
+      <tr>
+        <td id="70" class="black">
+          <img src="we.svg" alt="Black Knight" class="piece" draggable="false" />
+        </td>
+        <td id="71" class="white">
+          <img src="wh.svg" alt="White Bishop" class="piece" draggable="false" />
+        </td>
+        <td id="72" class="black">
+          <img src="wc.svg" alt="Black Queen" class="piece" draggable="false" />
+        </td>
+        <td id="73" class="white">
+          <img src="wk.svg" alt="White King" class="piece" draggable="false" />
+        </td>
+        <td id="74" class="black">
+          <img src="wq.svg" alt="Black Bishop" class="piece" draggable="false" />
+        </td>
+        <td id="75" class="white">
+          <img src="wc.svg" alt="White Knight" class="piece" draggable="false" />
+        </td>
+        <td id="76" class="black">
+          <img src="wh.svg" alt="Black Rook" class="piece" draggable="false" />
+        </td>
+        <td id="77" class="white">
+          <img src="we.svg" alt="White Rook" class="piece" draggable="false" />
+        </td>
+      </tr>
+    </table>
+    <div>
+      <p><strong> Player 2 (White) </strong></p>
     </div>
-    
-  </body>
-  <script type="module"  src="./logic.js"></script>
+  </div>
+  <div class="eliminated">
+    <div class="eliminatebox">
+      <div class="player-name">Eliminated By Black</div>
+      <div class="pieces"></div>
+    </div>
+
+    <div class="eliminatebox">
+      <div class="player-name">Eliminated By White</div>
+      <div class="pieces"></div>
+    </div>
+  </div>
+</body>
+<script type="module" src="./logic.js"></script>
 
 </html>
