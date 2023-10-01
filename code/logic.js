@@ -1,9 +1,16 @@
-//property's of every piece
-//function to get img name from position
+
+//sounds for each effects
+const killSound = document.getElementById("killSound");
+const moveSound = document.getElementById("moveSound");
+const captureSound = document.getElementById("captureSound");
+
+
+
 
 function getImgName(cellid) {
-    // console.log(cellid);
+
     let cell = document.getElementById(cellid);
+    if (cell == null) return null;
     let Imgcell = cell.querySelector("img");
     if (Imgcell == null) return null;
     let Imgname = Imgcell.getAttribute("src");
@@ -139,7 +146,7 @@ function showSoldierMoves(curPosition) {
 function showCamelMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
-    console.log(cell.childElementCount); 
+    console.log(cell.childElementCount);
     let Imgname = Imgcell.getAttribute("src");
 
     let positions = [];
@@ -319,6 +326,29 @@ function clearAllMoves() {
 
 
 
+// function showOverlay(message) {
+//     var overlay = document.getElementById("overlay");
+//     var overlayMessage = document.getElementById("overlay-message");
+
+//     overlayMessage.textContent = message;
+//     overlay.style.display = "block";
+
+//     setTimeout(function () {
+//         overlay.style.opacity = "1";
+//     }, 10);
+// }
+// showOverlay("PLATER 1 won the match");
+// function hideOverlay() {
+//     var overlay = document.getElementById("overlay");
+//     overlay.style.opacity = "0";
+
+//     setTimeout(function () {
+//         overlay.style.display = "none";
+//     }, 300);
+// }
+
+
+
 
 
 
@@ -335,16 +365,21 @@ function killing(cellid) {
     let cell = document.getElementById(cellid);
     let Imgcell = cell.querySelector("img");
     let Imgname = Imgcell.getAttribute("src");
+
+    let imgDiv = document.createElement("div");
     if (Imgname[0] == "b") {
         killedByWhite++;
-        eliminateboxWhite.appendChild(Imgcell);
-        
+        imgDiv.appendChild(Imgcell);
+        eliminateboxWhite.appendChild(imgDiv);
+
     } else {
         killedByBlack++;
-        eliminateboxBlack.appendChild(Imgcell);
+        imgDiv.appendChild(Imgcell);
+        eliminateboxBlack.appendChild(imgDiv);
+
     }
 
-    if(Imgname[1] == 'k' || killedByBlack==16 || killedByWhite==16){//king is eliminated or all     pieces are eliminated
+    if (Imgname[1] == 'k' || killedByBlack == 16 || killedByWhite == 16) {//king is eliminated or all     pieces are eliminated
         console.log("GAME OVER ");
 
         // exiting 
@@ -364,12 +399,83 @@ function move(from, to) {
     if (tocell.childElementCount == 0) {
         tocell.innerHTML = fromcell.innerHTML;
         fromcell.innerHTML = "";
-        console.log(fromcell.innerHTML,tocell.innerHTML);
+        moveSound.play();
+        // console.log(fromcell.innerHTML,tocell.innerHTML);
     } else {
+        killSound.play();
         killing(to);
+
         tocell.innerHTML = fromcell.innerHTML;
 
         fromcell.innerHTML = "";
+    }
+
+    //if soldier reaches the end of opposites town than give it a new pieces as exchange
+    tocell = document.getElementById(to);
+    // console.log(tocell);
+    const tocellImgName = getImgName(to);
+    if ((to[0] == '7' || to[0] == '0') && tocellImgName[1] == 's') {
+        // console.log("yes");
+        giveChangePiece(to, tocellImgName[0]);
+    }
+}
+
+function moveElimateBoxTocell(from, to) {
+    let tocell = document.getElementById(to);
+    console.log(from.innerHTML);
+    tocell.innerHTML = from.innerHTML;
+
+    from.innerHTML = "";
+
+
+
+}
+
+function removeOtherAnimations(player){
+    let divs;
+    if (player == 'b') {
+        divs = eliminateboxBlack.childNodes;
+
+    }
+    else {
+        divs = eliminateboxWhite.childNodes;
+
+    }
+
+
+    for (let div in divs) {
+        let img =div.querySelector('img');
+        img.classList.remove('border-animation');
+    }
+
+}
+function giveChangePiece(cellid, player) {
+    let imgs;
+    if (player == 'b') {
+        imgs = eliminateboxBlack.childNodes;
+        killedByWhite--;
+
+    }
+
+    else {
+        imgs = eliminateboxWhite.childNodes;
+        killedByBlack--;
+
+    }
+    console.log(imgs);
+    for (let imgDiv of imgs) {
+        let img = imgDiv.firstChild;
+        img.classList.add("border-animation");
+        img.addEventListener("click", () => {
+            img.classList.remove("border-animation");
+
+            killSound.play();//it's kill sound but suit on it
+
+            moveElimateBoxTocell(imgDiv, cellid);
+            removeOtherAnimations(player);
+
+
+        });
     }
 }
 // setTimeout(() => {
@@ -386,10 +492,10 @@ let lastClickedCell = null;
 for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
         let cellid = (i).toString() + (j).toString();
-            let cell = document.getElementById(cellid);
+        let cell = document.getElementById(cellid);
 
         cell.addEventListener('click', () => {
-            
+
             let Imgcell = cell.querySelector("img");
             if (cell.classList.contains("highlighted_cell_filled") || cell.classList.contains("highlighted_cell_empty")) {
                 move(lastClickedCell, cellid);
@@ -406,12 +512,12 @@ for (let i = 0; i < 8; i++) {
                     case 'c': showCamelMoves(cellid); break;
                     case 'e': showElephantMoves(cellid); break;
                     case 'h': showHorseMoves(cellid); break;
-                    
+
                 }
                 lastClickedCell = cellid;
             }
 
-            
+
         });
 
     }
