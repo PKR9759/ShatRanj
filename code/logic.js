@@ -1,14 +1,9 @@
-
 //sounds for each effects
 const killSound = document.getElementById("killSound");
 const moveSound = document.getElementById("moveSound");
 const captureSound = document.getElementById("captureSound");
 
-
-
-
 function getImgName(cellid) {
-
     let cell = document.getElementById(cellid);
     if (cell == null) return null;
     let Imgcell = cell.querySelector("img");
@@ -30,16 +25,14 @@ function highlightPosition(cellid, nextcellid) {
         let Imgnamenext = Imgcellnext.getAttribute("src");
         // console.log(Imgname[0], Imgnamenext[0]);
         if (Imgname[0] != Imgnamenext[0]) {
-            if (Imgname[1] != 's') {
+            if (Imgname[1] != "s") {
                 nextcell.classList.add("highlighted_cell_filled");
-            }
-            else {//soldiers can kill diaogonal but not step up positions that's why
+            } else {
+                //soldiers can kill diaogonal but not step up positions that's why
                 if (cellid[1] != nextcellid[1]) {
-
                     nextcell.classList.add("highlighted_cell_filled");
                 }
             }
-
         }
 
         return -1;
@@ -85,7 +78,7 @@ function showSoldierMoves(curPosition) {
     let curc = parseInt(curPosition[1]);
     if (Imgname[0] == "b") {
         positions.push([curr + 1, curc]);
-        if (!getImgName((curr + 1).toString() + (curc).toString())) {
+        if (!getImgName((curr + 1).toString() + curc.toString()) && (curr==1)) {
             positions.push([curr + 2, curc]);
         }
 
@@ -108,7 +101,7 @@ function showSoldierMoves(curPosition) {
         }
     } else {
         positions.push([curr - 1, curc]);
-        if (!getImgName((curr - 1).toString() + (curc).toString())) {
+        if (!getImgName((curr - 1).toString() + curc.toString())&& (curr==6)) {
             positions.push([curr - 2, curc]);
         }
 
@@ -306,8 +299,6 @@ function showHorseMoves(curPosition) {
 }
 // showHorseMoves("72");
 
-
-
 function clearAllMoves() {
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
@@ -318,42 +309,28 @@ function clearAllMoves() {
             }
             if (cell.classList.contains("highlighted_cell_empty")) {
                 cell.classList.remove("highlighted_cell_empty");
-
             }
         }
     }
 }
 
+function showOverlay(player) {
+    var overlay = document.getElementById("overlay");
+    var overlayMessage = document.getElementById("overlay-message");
 
+    overlayMessage.textContent = `🏆🏆 Winner : ${player == "b" ? "Black" : "White"
+        } 🏆🏆`;
+    overlay.style.display = "block";
 
-// function showOverlay(message) {
-//     var overlay = document.getElementById("overlay");
-//     var overlayMessage = document.getElementById("overlay-message");
+    setTimeout(function () {
+        overlay.style.opacity = "1";
+    }, 10);
+}
 
-//     overlayMessage.textContent = message;
-//     overlay.style.display = "block";
+// showOverlay('b');
 
-//     setTimeout(function () {
-//         overlay.style.opacity = "1";
-//     }, 10);
-// }
-// showOverlay("PLATER 1 won the match");
-// function hideOverlay() {
-//     var overlay = document.getElementById("overlay");
-//     overlay.style.opacity = "0";
-
-//     setTimeout(function () {
-//         overlay.style.display = "none";
-//     }, 300);
-// }
-
-
-
-
-
-
-let turnOf=true;//white=>true  black=>false
-
+let turnOf = "w"; //white=>w  black=>b
+addHighlightWhoseTurn(turnOf);
 var killedByBlack = 0;
 var killedByWhite = 0;
 const eliminated = document
@@ -369,24 +346,33 @@ function killing(cellid) {
 
     let imgDiv = document.createElement("div");
     if (Imgname[0] == "b") {
-        killedByWhite++;
         imgDiv.appendChild(Imgcell);
         eliminateboxWhite.appendChild(imgDiv);
-
+        killedByWhite++;
     } else {
-        killedByBlack++;
         imgDiv.appendChild(Imgcell);
         eliminateboxBlack.appendChild(imgDiv);
-
+        killedByBlack++;
     }
 
-    if (Imgname[1] == 'k' || killedByBlack == 16 || killedByWhite == 16) {//king is eliminated or all     pieces are eliminated
+    if (Imgname[1] == "k" || killedByBlack == 16 || killedByWhite == 16) {
+        //king is eliminated or all pieces are eliminated
+        setTimeout(() => {
+            //show who won the game
+            showOverlay(Imgname[0] == "b" ? "w" : "b"); //because last killed in lose the game
+        }, 1000);
+
         console.log("GAME OVER ");
+        setTimeout(() => {
+            let result = confirm("Are Want to Play Again the Game ?? ");
 
-        // exiting 
-        //restart game over
+            if (result) {
+                location.reload(); //restart the game
+            } else {
+                window.history.back(); //exit the game
+            }
+        }, 2000);
     }
-    // console.log(Imgname);
 }
 
 function move(from, to) {
@@ -404,6 +390,7 @@ function move(from, to) {
         // console.log(fromcell.innerHTML,tocell.innerHTML);
     } else {
         killSound.play();
+
         killing(to);
 
         tocell.innerHTML = fromcell.innerHTML;
@@ -415,7 +402,7 @@ function move(from, to) {
     tocell = document.getElementById(to);
     // console.log(tocell);
     const tocellImgName = getImgName(to);
-    if ((to[0] == '7' || to[0] == '0') && tocellImgName[1] == 's') {
+    if ((to[0] == "7" || to[0] == "0") && tocellImgName[1] == "s") {
         // console.log("yes");
         giveChangePiece(to, tocellImgName[0]);
     }
@@ -427,125 +414,122 @@ function moveElimateBoxTocell(from, to) {
     tocell.innerHTML = from.innerHTML;
 
     from.innerHTML = "";
-
-
-
 }
 
-function removeOtherAnimations(player){
+function removeOtherAnimations(player) {
     let divs;
-    if (player == 'w') {//if player is white then it can get eliminated pieces by white (black pieces)....
+    if (player == "w") {
+        //if player is white then it can get eliminated pieces by white (black pieces)....
 
         divs = eliminateboxBlack.childNodes;
-
-    }
-    else {
+    } else {
         divs = eliminateboxWhite.childNodes;
-
     }
-
 
     for (let div of divs) {
-        let img =div.childNodes[0];
+        let img = div.childNodes[0];
         // console.log(img);
-        if(img) {
-            img.classList.remove('border-animation');
+        if (img) {
+            img.classList.remove("border-animation");
         }
     }
-
 }
 function giveChangePiece(cellid, player) {
     let imgs;
-    if (player == 'w') {
+    if (player == "w") {
         imgs = eliminateboxBlack.childNodes;
         killedByWhite--;
-
-    }
-
-    else {
+    } else {
         imgs = eliminateboxWhite.childNodes;
         killedByBlack--;
-
     }
     console.log(imgs);
     for (let imgDiv of imgs) {
         let img = imgDiv.firstChild;
-        
-        let Imgname=img.getAttribute('src')[1];
-        if(Imgname!='s'){//because soldier can't respawn (it's already soldier)
+
+        let Imgname = img.getAttribute("src")[1];
+        if (Imgname != "s") {
+            //because soldier can't respawn (it's already soldier)
             img.classList.add("border-animation");
             img.addEventListener("click", () => {
                 img.classList.remove("border-animation");
-    
-                killSound.play();            //it's kill sound but suit on it
-    
+
+                killSound.play(); //it's kill sound but suit on it
+
                 moveElimateBoxTocell(imgDiv, cellid);
                 removeOtherAnimations(player);
-    
-    
-            }
-            );
+            });
         }
-        
     }
 }
 
-
-
-
-
-
+function addHighlightWhoseTurn(player) {
+    //function hightlight text of player whose turn is
+    let text;
+    if (player == "w") {
+        text = document.getElementById("whitePlayerText");
+    } else {
+        text = document.getElementById("blackPlayerText");
+    }
+    text.classList.add("border-animation");
+}
+function removeHighlightWhoseTurn(player) {
+    let text;
+    if (player == "w") {
+        text = document.getElementById("whitePlayerText");
+    } else {
+        text = document.getElementById("blackPlayerText");
+    }
+    text.classList.remove("border-animation");
+}
 
 let lastClickedCell = null;
 
 for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
-        let cellid = (i).toString() + (j).toString();
+        let cellid = i.toString() + j.toString();
         let cell = document.getElementById(cellid);
 
-        cell.addEventListener('click', () => {
-
+        cell.addEventListener("click", () => {
             let Imgcell = cell.querySelector("img");
-            if (cell.classList.contains("highlighted_cell_filled") || cell.classList.contains("highlighted_cell_empty")) {
+            if (
+                cell.classList.contains("highlighted_cell_filled") ||
+                cell.classList.contains("highlighted_cell_empty")
+            ) {
                 move(lastClickedCell, cellid);
                 clearAllMoves();
-
-            }
-            else if (Imgcell) {
+                removeHighlightWhoseTurn(turnOf);
+                turnOf = turnOf == "w" ? "b" : "w";
+                addHighlightWhoseTurn(turnOf);
+            } else if (Imgcell) {
                 let Imgname = Imgcell.getAttribute("src");
                 clearAllMoves();
-                switch (Imgname[1]) {
-                    case 's': showSoldierMoves(cellid); break;
-                    case 'k': showKingMoves(cellid); break;
-                    case 'q': showQueenMoves(cellid); break;
-                    case 'c': showCamelMoves(cellid); break;
-                    case 'e': showElephantMoves(cellid); break;
-                    case 'h': showHorseMoves(cellid); break;
 
+                if (Imgname[0] == turnOf) {
+                    // if clicked cell is a cell whose turn is so only show moves
+                    switch (Imgname[1]) {
+                        case "s":
+                            showSoldierMoves(cellid);
+                            break;
+                        case "k":
+                            showKingMoves(cellid);
+                            break;
+                        case "q":
+                            showQueenMoves(cellid);
+                            break;
+                        case "c":
+                            showCamelMoves(cellid);
+                            break;
+                        case "e":
+                            showElephantMoves(cellid);
+                            break;
+                        case "h":
+                            showHorseMoves(cellid);
+                            break;
+                    }
+                    lastClickedCell = cellid;
                 }
-                lastClickedCell = cellid;
             }
-
-
         });
-
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
