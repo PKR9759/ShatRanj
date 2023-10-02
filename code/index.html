@@ -1,65 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('/images/indexBackground.png'); /* Chess-related background */
-            background-size: cover;
-            overflow: hidden;
-        }
-        .header{
-            margin-left:0px;
-            display: flex;
-            justify-content: center;
-        }
-        .header h1{
-            padding: 13px;
-            font-size: 100px;
-            color: rgb(145, 148, 150);
-            box-shadow: 0px 5px 15px rgb(123, 170, 122);
-            border-radius: 20px;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        }
-        .start {
-            display: flex;
-            justify-content: center;
-            margin-top: 550px;
-        }
-        .start button {
-            font-size: 40px;
-            border: none;
-            background-color: antiquewhite;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .start button:hover {
-            background:linear-gradient(to right, #60a262, #bab3b3);; /* Change color on hover */
-            transform: scale(1.1); /* Scale up the button on hover */
-        }
-        .start button:focus {
-            border:3px groove rgb(233, 224, 224);
-            outline: none; /* Remove the default focus outline */
-            box-shadow: 0px 0px 10px #ebf1ec; /* Add a custom focus effect */
-        }
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Chess Game</title>
-</head>
-<body>
+  <head>
     
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="indexStyle.css">
+    <title>Chess Game</title>
+  </head>
+  <body>
     <div class="header">
-        <h1>Shatranj</h1>
+      <h1>Shatranj</h1>
     </div>
     <div class="start">
-        <a href="playground.html"><button type="button">Start Game</button></a>
+      <a href="playground.html"><button type="button">Start Game</button></a>
     </div>
-    
-   
-</body>
+  </body>
 </html>
