@@ -352,6 +352,7 @@ function clearAllMoves() {
 
 
 
+let turnOf=true;//white=>true  black=>false
 
 var killedByBlack = 0;
 var killedByWhite = 0;
@@ -433,7 +434,8 @@ function moveElimateBoxTocell(from, to) {
 
 function removeOtherAnimations(player){
     let divs;
-    if (player == 'b') {
+    if (player == 'w') {//if player is white then it can get eliminated pieces by white (black pieces)....
+
         divs = eliminateboxBlack.childNodes;
 
     }
@@ -443,15 +445,18 @@ function removeOtherAnimations(player){
     }
 
 
-    for (let div in divs) {
-        let img =div.querySelector('img');
-        img.classList.remove('border-animation');
+    for (let div of divs) {
+        let img =div.childNodes[0];
+        // console.log(img);
+        if(img) {
+            img.classList.remove('border-animation');
+        }
     }
 
 }
 function giveChangePiece(cellid, player) {
     let imgs;
-    if (player == 'b') {
+    if (player == 'w') {
         imgs = eliminateboxBlack.childNodes;
         killedByWhite--;
 
@@ -465,22 +470,26 @@ function giveChangePiece(cellid, player) {
     console.log(imgs);
     for (let imgDiv of imgs) {
         let img = imgDiv.firstChild;
-        img.classList.add("border-animation");
-        img.addEventListener("click", () => {
-            img.classList.remove("border-animation");
-
-            killSound.play();//it's kill sound but suit on it
-
-            moveElimateBoxTocell(imgDiv, cellid);
-            removeOtherAnimations(player);
-
-
-        });
+        
+        let Imgname=img.getAttribute('src')[1];
+        if(Imgname!='s'){//because soldier can't respawn (it's already soldier)
+            img.classList.add("border-animation");
+            img.addEventListener("click", () => {
+                img.classList.remove("border-animation");
+    
+                killSound.play();            //it's kill sound but suit on it
+    
+                moveElimateBoxTocell(imgDiv, cellid);
+                removeOtherAnimations(player);
+    
+    
+            }
+            );
+        }
+        
     }
 }
-// setTimeout(() => {
-//     move("01", "21");
-// }, 2000);
+
 
 
 
