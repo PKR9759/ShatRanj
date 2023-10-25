@@ -56,7 +56,7 @@ function showOverlay(player) {
 function killing(cellid) {
     let cell = document.getElementById(cellid);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let imgDiv = document.createElement("div");
     if (Imgname[0] == "b") {
@@ -78,7 +78,7 @@ function killing(cellid) {
 
         console.log("GAME OVER ");
         setTimeout(() => {
-            let result = confirm("Are Want to Play Again the Game ?? ");
+            let result = confirm("Are you Want to Play Again the Game ?? ");
 
             if (result) {
                 location.reload(); //restart the game
@@ -173,7 +173,7 @@ function giveChangePiece(cellid, player) {
     for (let imgDiv of imgs) {
         let img = imgDiv.firstChild;
 
-        let Imgname = img.getAttribute("src").substring(8, 10)[1];
+        let Imgname = img.getAttribute("src").substring(7, 9)[1];
         if (Imgname != "s") {
             //because soldier can't respawn (it's already soldier)
             img.classList.add("border-animation");
@@ -237,7 +237,7 @@ for (let i = 0; i < 8; i++) {
                 turnOf = turnOf == "w" ? "b" : "w";
                 addHighlightWhoseTurn(turnOf);
             } else if (Imgcell) {
-                let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+                let Imgname = Imgcell.getAttribute("src").substring(7, 9);
                 clearAllMoves();
 
                 if (Imgname[0] == turnOf) {

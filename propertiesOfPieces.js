@@ -8,14 +8,14 @@ export function getImgName(cellid) {
     if (Imgcell == null) return null;
     let Imgname = Imgcell.getAttribute("src");
 
-    return Imgname.substring(8, 10);
+    return Imgname.substring(7, 9);
 }
 
 
 export function highlightPosition(cellid, nextcellid) {
     let cell = document.getElementById(cellid);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let nextcell = document.getElementById(nextcellid);
 
@@ -23,7 +23,7 @@ export function highlightPosition(cellid, nextcellid) {
         nextcell.classList.add("highlighted_cell_empty");
     } else {
         let Imgcellnext = nextcell.querySelector("img");
-        let Imgnamenext = Imgcellnext.getAttribute("src").substring(8, 10);
+        let Imgnamenext = Imgcellnext.getAttribute("src").substring(7, 9);
 
         if (Imgname[0] != Imgnamenext[0]) {
             if (Imgname[1] != "s") {
@@ -45,7 +45,7 @@ export function highlightPosition(cellid, nextcellid) {
 export function showKingMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     const positions = [
         [0, 1],
@@ -73,7 +73,7 @@ export function showKingMoves(curPosition) {
 export function showSoldierMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let positions = [];
     let curr = parseInt(curPosition[0]);
@@ -142,7 +142,7 @@ export function showCamelMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
 
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let positions = [];
     let curr = parseInt(curPosition[0]);
@@ -205,7 +205,7 @@ export function showCamelMoves(curPosition) {
 export function showElephantMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let positions = [];
     let curr = parseInt(curPosition[0]);
@@ -272,7 +272,7 @@ export function showQueenMoves(curPosition) {
 export function showHorseMoves(curPosition) {
     let cell = document.getElementById(curPosition);
     let Imgcell = cell.querySelector("img");
-    let Imgname = Imgcell.getAttribute("src").substring(8, 10);
+    let Imgname = Imgcell.getAttribute("src").substring(7, 9);
 
     let positions = [
         [2, 1],

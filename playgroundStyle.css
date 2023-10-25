@@ -11,7 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url("/images/backgroundOfPlayground.avif");
+    background: url("images/backgroundOfPlayground.avif");
     background-size: cover;
     margin: 0;
     height: 100vh;
